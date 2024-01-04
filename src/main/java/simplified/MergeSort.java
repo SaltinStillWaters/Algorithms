@@ -1,7 +1,7 @@
-package salt.recursion;
+package simplified;
 
 
-public class test 
+public class MergeSort 
 {
     public static void mergeSort(int []array, int start, int end)
     {

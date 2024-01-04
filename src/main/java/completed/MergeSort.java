@@ -1,4 +1,4 @@
-package salt.recursion;
+package completed;
 
 
 public class MergeSort 

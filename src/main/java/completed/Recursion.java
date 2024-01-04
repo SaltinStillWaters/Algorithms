@@ -1,20 +1,8 @@
-package salt.recursion;
+package completed;
 
 
 public class Recursion 
-{
-    public static void main(String[] args) 
-    {
-        int[] array = {1, 2, 0, 5, 10, 0, 7, 6};
-        
-        test.mergeSort(array, 0, array.length - 1);
-        
-        for (int num : array)
-        {
-            System.out.println(num);
-        }
-    }
-    
+{   
     public static int sumNatural(int num)
     {
         if (num <= 0)
