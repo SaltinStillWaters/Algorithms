@@ -13,7 +13,13 @@ public class Main
        tree.insert(4);
        tree.insert(5);
        tree.insert(6);
+       tree.insert(7);
+       tree.insert(8);
        
+       tree.printPreOrder();
+        System.out.println("");
+       
+       tree.delete(5);
        tree.printPreOrder();
     }
 }

@@ -19,6 +19,65 @@ public class AVL
     
     private Node root;
     
+    public void delete(int val)
+    {
+        this.root = this.delete(root, val);
+    }
+    
+    private Node delete(Node head, int val)
+    {
+        if (head == null)
+        {
+            return head;
+        }
+        
+        if (val > head.val)
+        {
+            head.right = delete(head.right, val);
+        }
+        else if (val < head.val)
+        {
+            head.left = delete(head.left, val);
+        }
+        else
+        {
+            if (head.right == head.left)    //leaf node
+            {
+                return null;
+            }
+            
+            head.right.left = insert(head.right, head.left);
+            return head.right;
+        }
+        
+        head.BF = getBF(head);
+        while (head.BF > 1 || head.BF < -1)
+        {
+            head = rotate(head);
+            head.BF = getBF(head);
+        }
+        
+        return head;
+    }
+    
+    private Node insert(Node root, Node toInsert)
+    {
+        if (root == null || toInsert == null)
+        {
+            return toInsert;
+        }
+        
+        root.left = insert(root.left, toInsert);
+        
+        root.BF = getBF(root);
+        while (root.BF > 1 || root.BF < -1)
+        {
+            root = rotate(root);
+            root.BF = getBF(root);
+        }
+        
+        return root.left;
+    }
     
     public void insert(int val)
     {
