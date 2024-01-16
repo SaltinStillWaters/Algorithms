@@ -1,3 +1,5 @@
+package completed;
+
 
 public class LinkedList 
 {
@@ -15,12 +17,18 @@ public class LinkedList
     
     private Node head;
 
-    
+    /**
+     * Creates an empty LinkedList with 'head' set to 'null
+     */
     public LinkedList()
     {
         this.head = null;
     }
     
+    /**
+     * Creates an initialized LinkedList from the values of an existing LinkedList
+     * @param list list to be copied over
+     */
     public LinkedList(LinkedList list)
     {
         LinkedList copiedList = new LinkedList();
@@ -29,7 +37,14 @@ public class LinkedList
         {
             copiedList.add(iter.val);
         }
+        
+        this.head = copiedList.head;
     }
+    
+    /**
+     * Adds a new Node to the end of the list
+     * @param val value to add
+     */
     public void add(int val)
     {
         if (this.isEmpty())
@@ -48,6 +63,10 @@ public class LinkedList
         iter.next = temp;
     }
     
+    /**
+     * Removes the first occurrence of the Node with the supplied value. 
+     * @param toRemove value of the Node to be removed
+     */
     public void remove(int toRemove)
     {
         if (this.isEmpty())
@@ -72,6 +91,11 @@ public class LinkedList
         }
     }
     
+    /**
+     * Checks whether a Node with a given value exists.
+     * @param toSearch value to search for.
+     * @return returns true if Node is found, otherwise false.
+     */
     public boolean contains(int toSearch)
     {
         if (this.isEmpty())
@@ -90,13 +114,38 @@ public class LinkedList
         return false;
     }
     
-    public void merge(LinkedList list)
+    /**
+     * Merges 2 lists by attaching the argument list's head to the tail of the calling list.
+     * @param list list to merge with
+     */
+    public void mergeUnsorted(LinkedList list)
     {
-        LinkedList temp = new LinkedList(list);
-        this.head = merge(this.head, temp.head);
+        if (this.isEmpty())
+        {
+            return;
+        }
+        
+        Node iter = this.head;
+        while (iter.next != null)
+        {
+            iter = iter.next;
+        }
+        
+        iter.next = list.head;
     }
     
-    private Node merge(Node head1, Node head2)
+    /**
+     * Merges 2 LinkedLists that will first be sorted.
+     * The result will be returned to the calling list.
+     * @param list list to merge with. Will not be modified.
+     */
+    public void mergeSorted(LinkedList list)
+    {
+        LinkedList temp = new LinkedList(list);
+        this.head = mergeSorted(this.head, temp.head);
+    }
+    
+    private Node mergeSorted(Node head1, Node head2)
     {
         if (head1 == null)
         {
@@ -111,15 +160,14 @@ public class LinkedList
         
         if (head1.val <= head2.val)
         {
-            head1.next = merge(head1.next, head2);
+            head1.next = mergeSorted(head1.next, head2);
             return head1;
         }
         else
         {
-            head2.next = merge(head1, head2.next);
+            head2.next = mergeSorted(head1, head2.next);
             return head2;
         }
-        
     }
     
     public void reverse()
@@ -159,6 +207,7 @@ public class LinkedList
         {
             System.out.print(iter.val + " ");
         }
+        System.out.println();
     }
     
 }
