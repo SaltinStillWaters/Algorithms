@@ -202,7 +202,6 @@ public class LinkedList
             return;
         }
         
-        
         for (Node iter = head; iter != null; iter = iter.next)
         {
             System.out.print(iter.val + " ");
