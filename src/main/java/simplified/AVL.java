@@ -1,3 +1,5 @@
+package simplified;
+
 
 public class AVL 
 {
@@ -19,46 +21,6 @@ public class AVL
     
     private Node root;
     
-    public void delete(int val)
-    {
-        this.root = this.delete(root, val);
-    }
-    
-    private Node delete(Node head, int val)
-    {
-        if (head == null)
-        {
-            return head;
-        }
-        
-        if (val > head.val)
-        {
-            head.right = delete(head.right, val);
-        }
-        else if (val < head.val)
-        {
-            head.left = delete(head.left, val);
-        }
-        else
-        {
-            if (head.right == head.left)    //leaf node
-            {
-                return null;
-            }
-            
-            head.right.left = insert(head.right, head.left);
-            return head.right;
-        }
-        
-        head.BF = getBF(head);
-        while (head.BF > 1 || head.BF < -1)
-        {
-            head = rotate(head);
-            head.BF = getBF(head);
-        }
-        
-        return head;
-    }
     
     private Node insert(Node root, Node toInsert)
     {
@@ -106,6 +68,7 @@ public class AVL
         
         return root;
     }
+    
     
     private int getBF(Node root)
     {   
@@ -196,19 +159,63 @@ public class AVL
         return rotateRR(root);
     }
     
+    public void delete(int val)
+    {
+        this.root = this.delete(root, val);
+    }
+    
+    private Node delete(Node head, int val)
+    {
+        if (head == null)
+        {
+            return head;
+        }
+        
+        if (val > head.val)
+        {
+            head.right = delete(head.right, val);
+        }
+        else if (val < head.val)
+        {
+            head.left = delete(head.left, val);
+        }
+        else
+        {
+            if (head.right == head.left)
+            {
+                return null;
+            }
+            
+            head.right.left = insert(head.right, head.left);
+            return head.right;
+        }
+        
+        head.BF = getBF(head);
+        while (head.BF > 1 || head.BF < -1)
+        {
+            head = rotate(head);
+            head.BF = getBF(head);
+        }
+        
+        return head;
+    }
+    
     public void printInOrder()
     {
         printInOrder(this.root);
+        System.out.println("");
     }
     
     public void printPreOrder()
     {
         printPreOrder(this.root);
+        System.out.println("");
     }
     
     public void printPostOrder()
     {
         printPostOrder(this.root);
+        System.out.println("");
     }
     
     private void printPreOrder(Node root)
@@ -246,7 +253,6 @@ public class AVL
         printPostOrder(root.right);
         System.out.print(root.val + " ");
     }
-    
     
     public boolean isEmpty()
     {
