@@ -2,9 +2,9 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 
-public class BFS 
+public class DFS 
 {
-    public static void bfs(int start, boolean[][] graph)
+    public static void dfs(int start, boolean[][] graph)
     {
         Deque<Integer> deque = new ArrayDeque<>();
         boolean[] visited = new boolean[graph[0].length];
@@ -19,7 +19,7 @@ public class BFS
 
         if (!visited[vertex])
         {
-            deque.add(vertex);
+            deque.push(vertex);
             visited[vertex] = true;
         }
         
@@ -36,6 +36,6 @@ public class BFS
             }
         }
 
-        deque.remove();
+        deque.pop();
     }
 }
