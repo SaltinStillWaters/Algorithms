@@ -21,6 +21,29 @@ public class AVL
     
     private Node root;
     
+    public boolean find(int toFind)
+    {
+        return find(root, toFind);
+    }
+
+    private boolean find(Node root, int toFind)
+    {
+        if (root == null)
+        {
+            return false;
+        }
+
+        if (toFind > root.val)
+        {
+            return find(root.right, toFind);
+        }
+        else if (toFind < root.val)
+        {
+            return find(root.left, toFind);
+        }
+
+        return true;
+    }
     
     private Node insert(Node root, Node toInsert)
     {
