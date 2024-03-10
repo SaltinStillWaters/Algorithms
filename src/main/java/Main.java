@@ -3,24 +3,33 @@ public class Main
 {
     public static void main(String[] args)
     {
-        simplified.AVL avl = new simplified.AVL();
-
-        int[] inputs = {5, 4, 0, 1, 3, 9, 6, 8, 10};
-        System.out.println("\nOriginal linear array:");
-        for (int x : inputs)
+        int[][] graph = 
         {
-            avl.insert(x);
-            System.out.print(x + " ");
+            {-1, 4, 2, 2},
+            {4, -1, 6, 3},
+            {2, 6, -1, 2},
+            {2, 3, 2, -1}
+        };
+        System.out.println("\n\nOriginal Graph:");
+        for (int[] arr : graph)
+        {
+            for (int x : arr)
+            {
+                System.out.print(x + "\t");
+            }
+            System.out.println();
         }
-        
-        System.out.println("\n\navl tree in-order traversal:");
-        avl.printInOrder();
 
-        System.out.println("\nLookup:");
-        int[] toLook = {5, 2, 1, 0, 6, 11};
-        for (int x : toLook)
+
+        int[][] MST = Kruskal.kruskal(graph);
+        System.out.println("\nMinimum Spanning Tree:");
+        for (int[] arr : MST)
         {
-            System.out.println(x + " is in the AVL tree:\t" + avl.find(x));
+            for (int x : arr)
+            {
+                System.out.print(x + "\t");
+            }
+            System.out.println();
         }
     }
 }
